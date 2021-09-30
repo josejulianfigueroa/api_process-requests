@@ -1,0 +1,64 @@
+{
+	"info": {
+		"_postman_id": "bed8bee6-0d7e-4829-8c20-45e61cd48bda",
+		"name": "Api Process Encuesta",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "save Encuesta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\": \"josejulianfigueroa2gmail.com\",\r\n\"estiloMusica\": \"ROCK\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8171/api/process_requests/v1/save/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8171",
+					"path": [
+						"api",
+						"process_requests",
+						"v1",
+						"save",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Encuestas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8171/api/process_requests/v1/list/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8171",
+					"path": [
+						"api",
+						"process_requests",
+						"v1",
+						"list",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
