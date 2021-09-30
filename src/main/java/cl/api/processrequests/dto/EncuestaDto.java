@@ -1,6 +1,5 @@
 package cl.api.processrequests.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "tEncuestas")

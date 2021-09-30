@@ -27,7 +27,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 public class ApiProcessRequestController {
 
     /**
@@ -67,7 +67,7 @@ public class ApiProcessRequestController {
      * Obtener resultados de las encuestas
     */
     @GetMapping(value = "/process_requests/${info.version}/list/", produces = MediaType.APPLICATION_JSON_VALUE)
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:4200")
     public ModelAndView getlistEncuesta()
             throws ResponseException, IOException {
         List<EncuestaDto> response = encuestaRepository.getEncuesta();
@@ -78,7 +78,7 @@ public class ApiProcessRequestController {
      * Guardar Encuesta
 */
     @PostMapping(value = "/process_requests/${info.version}/save/", produces = MediaType.APPLICATION_JSON_VALUE)
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:4200")
     public ModelAndView saveEncuesta(@Valid @RequestBody() EncuestaDtoIn body) throws ResponseException, JsonProcessingException {
         return ResponseUtil.genericResponseFind(new ObjectMapper().writeValueAsString(encuestaRepository.saveEncuesta(body)));
     }
