@@ -1,9 +1,10 @@
 package cl.api.processrequests.controller;
 
+import cl.api.processrequests.dto.EncuestaDtoIn;
 import cl.api.processrequests.exception.ErrorResponseJson;
 import cl.api.processrequests.exception.ResponseException;
+import cl.api.processrequests.dto.EncuestaDto;
 import cl.api.processrequests.util.ResponseUtil;
-import cl.api.processrequests.pojo.EncuestaEntity;
 import cl.api.processrequests.repository.EncuestaRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -69,16 +70,16 @@ public class ApiProcessRequestController {
     @CrossOrigin
     public ModelAndView getlistEncuesta()
             throws ResponseException, IOException {
-        List<EncuestaEntity> response = encuestaRepository.getEncuesta();
+        List<EncuestaDto> response = encuestaRepository.getEncuesta();
         return ResponseUtil.genericResponseFind(new ObjectMapper().writeValueAsString(response));
     }
 
     /*
      * Guardar Encuesta
-     */
+*/
     @PostMapping(value = "/process_requests/${info.version}/save/", produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin
-    public ModelAndView saveEncuesta(@Valid @RequestBody() EncuestaEntity body) throws ResponseException, JsonProcessingException {
+    public ModelAndView saveEncuesta(@Valid @RequestBody() EncuestaDtoIn body) throws ResponseException, JsonProcessingException {
         return ResponseUtil.genericResponseFind(new ObjectMapper().writeValueAsString(encuestaRepository.saveEncuesta(body)));
     }
 

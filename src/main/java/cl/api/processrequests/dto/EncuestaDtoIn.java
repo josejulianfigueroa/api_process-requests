@@ -1,14 +1,14 @@
-package cl.api.processrequests.pojo;
+package cl.api.processrequests.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Document(collection = "tEncuestas")
-public class EncuestaEntity {
+public class EncuestaDtoIn {
 
     @Id
     private String id;
@@ -30,7 +30,7 @@ public class EncuestaEntity {
         return id;
     }
 
-    public EncuestaEntity setId(final String id) {
+    public EncuestaDtoIn setId(final String id) {
         this.id = id;
         return this;
     }
@@ -39,7 +39,7 @@ public class EncuestaEntity {
         return email;
     }
 
-    public EncuestaEntity setEmail(final String email) {
+    public EncuestaDtoIn setEmail(final String email) {
         this.email = email;
         return this;
     }
@@ -48,7 +48,7 @@ public class EncuestaEntity {
         return estiloMusica;
     }
 
-    public EncuestaEntity setEstiloMusica(final String estiloMusica) {
+    public EncuestaDtoIn setEstiloMusica(final String estiloMusica) {
         this.estiloMusica = estiloMusica;
         return this;
     }

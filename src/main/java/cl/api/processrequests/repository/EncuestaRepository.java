@@ -1,8 +1,9 @@
 package cl.api.processrequests.repository;
 
+import cl.api.processrequests.dto.EncuestaDtoIn;
 import cl.api.processrequests.exception.ResponseException;
 import cl.api.processrequests.exception.StatusResponseEnum;
-import cl.api.processrequests.pojo.EncuestaEntity;
+import cl.api.processrequests.dto.EncuestaDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -23,15 +24,16 @@ public class EncuestaRepository {
         this.mongoOperations = mongoOperations;
     }
 
-    public String  saveEncuesta(EncuestaEntity body) throws ResponseException {
+    public String  saveEncuesta(EncuestaDtoIn body) throws ResponseException {
         try {
+            EncuestaDto bodyDocument = new EncuestaDto().setEmail(body.getEmail()).setEstiloMusica(body.getEstiloMusica());
             Query query = new Query();
-            query.addCriteria(Criteria.where("email").is(body.getEmail()));
-            List<EncuestaEntity> lista = this.mongoOperations.find(query, EncuestaEntity.class);
+            query.addCriteria(Criteria.where("email").is(bodyDocument.getEmail()));
+            List<EncuestaDto> lista = this.mongoOperations.find(query, EncuestaDto.class);
             if (!lista.isEmpty()){
                 return "Email ya existe en la base de datos";
             } else {
-                this.mongoOperations.save(body);
+                this.mongoOperations.save(bodyDocument);
                 return "Registro ingresado exitosamente";
             }
         } catch (Exception ex) {
@@ -39,10 +41,9 @@ public class EncuestaRepository {
         }
     }
 
-    public List<EncuestaEntity> getEncuesta() throws ResponseException {
+    public List<EncuestaDto> getEncuesta() throws ResponseException {
         try {
-            List<EncuestaEntity> listaEncuestas = this.mongoOperations.find(new Query(), EncuestaEntity.class);
-            return listaEncuestas;
+            return this.mongoOperations.find(new Query(), EncuestaDto.class);
         } catch (Exception ex) {
             throw new ResponseException(EXCEPTION, StatusResponseEnum.INTERNAL_SERVER_ERROR, true, "getEncuestas");
         }

@@ -22,7 +22,7 @@ public class ErrorResponseJson {
 		super();
 		this.result = e.isResult();
 		this.status = new StatusInfoJson(e.getStatusResponseEnum().getStatusCode(),
-				e.getStatusResponseEnum().toString().replaceAll("_", " "));
+				e.getStatusResponseEnum().toString().replace("_", " "));
 		this.error = new ErrorInfoJson(e.getMessage(), e.getField());
 	}
 
@@ -30,7 +30,7 @@ public class ErrorResponseJson {
 		super();
 		this.result = false;
 		this.status = new StatusInfoJson(StatusResponseEnum.INTERNAL_SERVER_ERROR.getStatusCode(),
-				StatusResponseEnum.INTERNAL_SERVER_ERROR.toString().replaceAll("_", " "));
+				StatusResponseEnum.INTERNAL_SERVER_ERROR.toString().replace("_", " "));
 		this.error = new ErrorInfoJson(e.getMessage(), "");
 	}
 	
@@ -38,7 +38,7 @@ public class ErrorResponseJson {
 		super();
 		this.result = false;
 		this.status = new StatusInfoJson(StatusResponseEnum.PRECONDITION_FAILED.getStatusCode(),
-				StatusResponseEnum.PRECONDITION_FAILED.toString().replaceAll("_", " "));
+				StatusResponseEnum.PRECONDITION_FAILED.toString().replace("_", " "));
 		this.error = new ErrorInfoJson(message, "");
 	}
 

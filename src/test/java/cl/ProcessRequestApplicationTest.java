@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import cl.api.processrequests.ProcessRequestApplication;
-import cl.api.processrequests.pojo.EncuestaEntity;
+import cl.api.processrequests.dto.EncuestaDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class ProcessRequestApplicationTest {
     @Test
     public void testInsertEncuestaOK() throws Exception {
         String urlController = "http://localhost:8171/api/process_requests/v1/save/";
-        EncuestaEntity obj = new EncuestaEntity().setEmail("jj@gmail.com").setEstiloMusica("ROCK");
+        EncuestaDto obj = new EncuestaDto().setEmail("jj@gmail.com").setEstiloMusica("ROCK");
 
         assertNotNull(this.mvc.perform(post(urlController).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(obj)))
