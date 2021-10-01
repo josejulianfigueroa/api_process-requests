@@ -7,8 +7,8 @@ __api_process_requests__
 	
 Listado de servicios:
 
-	1. ../process_requests/${info.version}/{lIdtplCabezaCotiza}/ GET : Obtiene todos los registros de la tabla tEncuestas.
-	4. ../process_requests/${info.version}/save POST: Inserta registro en colección tEncuestas de MongoDB.
+	1. ../process_requests/${info.version}/list/ GET : Obtiene todos los registros de la tabla tEncuestas.
+	4. ../process_requests/${info.version}/save/ POST: Inserta registro en colección tEncuestas de MongoDB.
 
 
 ## Descripción archivo YML
