@@ -71,6 +71,7 @@ public class ApiProcessRequestController {
     public ModelAndView getlistEncuesta()
             throws ResponseException, IOException {
         List<EncuestaDto> response = encuestaRepository.getEncuesta();
+
         return ResponseUtil.genericResponseFind(new ObjectMapper().writeValueAsString(response));
     }
 
