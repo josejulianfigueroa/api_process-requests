@@ -1,6 +1,7 @@
 package cl.api.processrequests.repository;
 
 import cl.api.processrequests.dto.EncuestaDtoIn;
+import cl.api.processrequests.dto.UserData;
 import cl.api.processrequests.exception.ResponseException;
 import cl.api.processrequests.exception.StatusResponseEnum;
 import cl.api.processrequests.dto.EncuestaDto;
@@ -9,13 +10,18 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Component
 public class EncuestaRepository {
 
     private static final String EXCEPTION = "Exception";
+
+    @Autowired
+    private RestTemplate clienteRest;
 
     @Autowired
     private final MongoOperations mongoOperations;
@@ -48,5 +54,14 @@ public class EncuestaRepository {
             throw new ResponseException(EXCEPTION, StatusResponseEnum.INTERNAL_SERVER_ERROR, true, "getEncuestas");
         }
     }
+    public List<UserData> getDataUserImpl() throws ResponseException {
+        try {
+            List<UserData> usuarios = Arrays.asList(clienteRest.getForObject("https://jsonplaceholder.typicode.com/todos", UserData[].class));
 
+            // return usuarios.stream().map(p -> new Item(p, 1)).collect(Collectors.toList());
+            return usuarios;
+        } catch (Exception ex) {
+            throw new ResponseException(EXCEPTION, StatusResponseEnum.INTERNAL_SERVER_ERROR, true, "getDataUser");
+        }
+    }
 }

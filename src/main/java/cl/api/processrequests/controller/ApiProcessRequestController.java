@@ -1,9 +1,11 @@
 package cl.api.processrequests.controller;
 
 import cl.api.processrequests.dto.EncuestaDtoIn;
+import cl.api.processrequests.dto.UserData;
 import cl.api.processrequests.exception.ErrorResponseJson;
 import cl.api.processrequests.exception.ResponseException;
 import cl.api.processrequests.dto.EncuestaDto;
+import cl.api.processrequests.service.IProductoService;
 import cl.api.processrequests.util.ResponseUtil;
 import cl.api.processrequests.repository.EncuestaRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -37,6 +39,9 @@ public class ApiProcessRequestController {
 
     @Autowired
     private EncuestaRepository encuestaRepository;
+
+    @Autowired
+    private IProductoService productoService;
 
     @ControllerAdvice
     public static class ErrorHandler {
@@ -84,4 +89,34 @@ public class ApiProcessRequestController {
         return ResponseUtil.genericResponseFind(new ObjectMapper().writeValueAsString(encuestaRepository.saveEncuesta(body)));
     }
 
+    /*
+     * Get Servicio Externo
+     */
+    @GetMapping(value = "/process_requests/${info.version}/externo/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ModelAndView getDataUser()
+            throws ResponseException, IOException {
+        List<UserData> response = encuestaRepository.getDataUserImpl();
+
+        return ResponseUtil.genericResponseFind(new ObjectMapper().writeValueAsString(response));
+    }
+
+
+    /*
+     * Get Servicio Externo Response Directa Json
+     */
+    @GetMapping(value = "/process_requests/${info.version}/externo2/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "http://localhost:4200")
+    public List<UserData> getDataUser2() throws ResponseException {
+        return encuestaRepository.getDataUserImpl();
+    }
+
+    /*
+     * Get Servicio Externo Otra Response
+     */
+    @GetMapping(value = "/process_requests/${info.version}/externo3/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "http://localhost:4200")
+    public List<UserData> getDataUser3() {
+        return productoService.findAll();
+    }
 }
